@@ -139,6 +139,8 @@ CREATE TABLE IF NOT EXISTS `Pizzaria`.`pedido_sabor` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
+ALTER TABLE `pedido` ADD `date` DATE NULL AFTER `endereço`;
+
 
 INSERT INTO `sabor` (`idsabor`, `sabor`) VALUES (NULL, '4 Queijos'), (NULL, 'Frango com Catupiry'), (NULL, 'Calabresa'), (NULL, 'Lombinho'), (NULL, 'Filé com Cheddar'), (NULL, 'Portuguesa'), (NULL, 'Margherita');
 

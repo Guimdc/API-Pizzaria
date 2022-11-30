@@ -21,3 +21,7 @@ exports.get= async (headers)=>{
 exports.login= async (body)=>{
   return await userModel.login(body)
 }
+
+exports.signup= async (body)=>{
+    return await userModel.signup(body)
+  }
