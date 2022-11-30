@@ -18,9 +18,10 @@ const {
   } = require ('./config');
 
 const route=require("./routers/route");
+const userRoute=require("./routers/user");
 
 
 app.use('/', route);
-
+app.use('/user', userRoute);
 
 module.exports=app;
