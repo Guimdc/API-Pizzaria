@@ -7,6 +7,7 @@ get = async () => {
     t ON p.tamanho_idtamanho = t.idtamanho JOIN pessoa AS ps ON p.pessoa_idpessoa = ps.idpessoa`;
 
     const result = await mysql.query(sql);
+    
     for (i = 0; i<result.length; i++){
         sql1=`SELECT s.sabor FROM sabor AS s JOIN pedido_sabor AS ps ON s.idsabor = ps.sabor_idsabor JOIN pedido AS p 
         ON p.idpedido = ps.pedido_idpedido WHERE ps.pedido_idpedido = ${result[i].idpedido}`
@@ -15,6 +16,23 @@ get = async () => {
         result[i].sabores = sabores;
     }
 
+    return result;
+}
+
+getById = async (idPedido) => {
+    sql=`SELECT p.idpedido, m.massa, b.borda, t.tamanho, ps.nome AS cliente, p.status, p.endereço, p.date FROM pedido 
+    AS p JOIN massa AS m ON p.massa_idmassa = m.idmassa JOIN borda AS b ON p.borda_idborda = b.idborda JOIN tamanho AS 
+    t ON p.tamanho_idtamanho = t.idtamanho JOIN pessoa AS ps ON p.pessoa_idpessoa = ps.idpessoa WHERE p.idpedido = ${idPedido}`;
+
+    const result = await mysql.query(sql);
+
+    if(result.length!=0){
+        sql1=`SELECT s.sabor FROM sabor AS s JOIN pedido_sabor AS ps ON s.idsabor = ps.sabor_idsabor JOIN pedido AS p 
+        ON p.idpedido = ps.pedido_idpedido WHERE ps.pedido_idpedido = ${idPedido}`
+        const result1 = await mysql.query(sql1);
+        const sabores = result1.map(result1 => result1.sabor);
+        result[0].sabores = sabores;
+    }
     return result;
 }
 
@@ -42,4 +60,4 @@ post = async (data) => {
     return resp;
 }
 
-module.exports = { get, post }
+module.exports = { get, getById, post }
