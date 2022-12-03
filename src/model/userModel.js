@@ -56,6 +56,8 @@ signup = async (data) => {
 
 verifyJWT = async (token, perfil) => {
     console.log(token)
+    console.log("aqui");
+    console.log(perfil);
     if (!token) {
         resp = { auth: false, message: 'Token não informado.' };
     }

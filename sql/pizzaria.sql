@@ -83,7 +83,7 @@ ENGINE = InnoDB;
 -- Table `Pizzaria`.`pedido`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `Pizzaria`.`pedido` (
-  `idpedido` INT NOT NULL,
+  `idpedido` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `massa_idmassa` INT UNSIGNED NOT NULL,
   `borda_idborda` INT UNSIGNED NOT NULL,
   `pessoa_idpessoa` INT UNSIGNED NOT NULL,
@@ -122,7 +122,7 @@ ENGINE = InnoDB;
 -- Table `Pizzaria`.`pedido_sabor`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `Pizzaria`.`pedido_sabor` (
-  `pedido_idpedido` INT NOT NULL,
+  `pedido_idpedido` INT UNSIGNED NOT NULL,
   `sabor_idsabor` INT UNSIGNED NOT NULL,
   PRIMARY KEY (`pedido_idpedido`, `sabor_idsabor`),
   INDEX `fk_pedido_has_sabor_sabor1_idx` (`sabor_idsabor` ASC),
