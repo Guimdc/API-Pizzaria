@@ -1,4 +1,22 @@
+const { query } = require("express");
 const mysql = require("./mysqlConnect");
+
+get = async () => {
+    sql=`SELECT p.idpedido, m.massa, b.borda, t.tamanho, ps.nome AS cliente, p.status, p.endereço, p.date FROM pedido 
+    AS p JOIN massa AS m ON p.massa_idmassa = m.idmassa JOIN borda AS b ON p.borda_idborda = b.idborda JOIN tamanho AS 
+    t ON p.tamanho_idtamanho = t.idtamanho JOIN pessoa AS ps ON p.pessoa_idpessoa = ps.idpessoa`;
+
+    const result = await mysql.query(sql);
+    for (i = 0; i<result.length; i++){
+        sql1=`SELECT s.sabor FROM sabor AS s JOIN pedido_sabor AS ps ON s.idsabor = ps.sabor_idsabor JOIN pedido AS p 
+        ON p.idpedido = ps.pedido_idpedido WHERE ps.pedido_idpedido = ${result[i].idpedido}`
+        const result1 = await mysql.query(sql1);
+        const sabores = result1.map(result1 => result1.sabor);
+        result[i].sabores = sabores;
+    }
+
+    return result;
+}
 
 post = async (data) => {
     sql = `INSERT INTO pedido(massa_idmassa, borda_idborda, pessoa_idpessoa,tamanho_idtamanho, status, endereço, date) 
@@ -11,7 +29,8 @@ post = async (data) => {
     console.log(result.insertId);
 
     for (i = 0; i < data.sabor.length; i++) {
-        sql1 = `INSERT INTO pedido_sabor(pedido_idpedido, sabor_idsabor) VALUES (${id}, (SELECT idsabor FROM sabor WHERE sabor = "${data.sabor[i]}" LIMIT 1))`;
+        sql1 = `INSERT INTO pedido_sabor(pedido_idpedido, sabor_idsabor) VALUES (${id}, (SELECT idsabor FROM sabor WHERE sabor = 
+            "${data.sabor[i]}" LIMIT 1))`;
         const result = await mysql.query(sql1);
     }
 
@@ -23,4 +42,4 @@ post = async (data) => {
     return resp;
 }
 
-module.exports = { post }
+module.exports = { get, post }
