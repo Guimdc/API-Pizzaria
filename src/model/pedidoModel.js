@@ -7,7 +7,7 @@ get = async () => {
     t ON p.tamanho_idtamanho = t.idtamanho JOIN pessoa AS ps ON p.pessoa_idpessoa = ps.idpessoa`;
 
     const result = await mysql.query(sql);
-    
+
     for (i = 0; i<result.length; i++){
         sql1=`SELECT s.sabor FROM sabor AS s JOIN pedido_sabor AS ps ON s.idsabor = ps.sabor_idsabor JOIN pedido AS p 
         ON p.idpedido = ps.pedido_idpedido WHERE ps.pedido_idpedido = ${result[i].idpedido}`
@@ -60,4 +60,15 @@ post = async (data) => {
     return resp;
 }
 
-module.exports = { get, getById, post }
+putStatus = async (data, idPedido) =>{
+    sql = `UPDATE pedido SET status="${data.status}" WHERE idpedido=${idPedido}`
+    const result = await mysql.query(sql);
+    if (result) {
+        resp = { "status": "OK"}
+    }else {
+        resp = { "status": "Error", "error": result }
+    }
+    return resp;
+}
+
+module.exports = { get, getById, post, putStatus }

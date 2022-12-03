@@ -17,4 +17,9 @@ pedidoRouter.post('/', async (req, res, next) => {
   res.status(200).send(user);
 })
 
+pedidoRouter.put('/status/:idPedido', async(req, res)=>{
+  resp=await pedidoController.putStatus(req.headers, req.body, req.params.idPedido );
+  res.status(200).send(resp);
+})
+
 module.exports = pedidoRouter;

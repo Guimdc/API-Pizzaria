@@ -44,3 +44,17 @@ exports.post= async (headers, data)=>{
   }
   return resp;
 }
+
+exports.putStatus= async (headers, data, idPedido)=>{
+    auth= await userModel.verifyJWT(headers['x-access-token'],headers['perfil']);
+    if(auth.idUser){
+      if(headers.iduser==auth.idUser){
+        resp=pedidoModel.putStatus(data, idPedido);
+      }else{ 
+        resp= {"status":"null", auth}
+      }
+    }else{
+      resp= {"status":"null", auth}
+    }
+    return resp;
+}
