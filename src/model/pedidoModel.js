@@ -60,7 +60,7 @@ post = async (data) => {
     return resp;
 }
 
-putStatus = async (data, idPedido) =>{
+putStatus = async (data, idPedido) => {
     sql = `UPDATE pedido SET status="${data.status}" WHERE idpedido=${idPedido}`
     const result = await mysql.query(sql);
     if (result) {
@@ -71,4 +71,19 @@ putStatus = async (data, idPedido) =>{
     return resp;
 }
 
-module.exports = { get, getById, post, putStatus }
+del = async (idPedido) => {
+    sql = `DELETE FROM pedido_sabor WHERE pedido_idpedido = ${idPedido}`
+    sql1 = `DELETE FROM pedido WHERE idpedido = ${idPedido}`
+    const result = await mysql.query(sql);
+    const result1 = await mysql.query(sql1);
+
+    if (result&&result1) {
+        resp = { "status": "OK" }
+    } else {
+        resp = { "status": "Error", "error": result }
+    }
+
+    return resp;
+}
+
+module.exports = { get, getById, post, putStatus, del }

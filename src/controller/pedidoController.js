@@ -58,3 +58,17 @@ exports.putStatus= async (headers, data, idPedido)=>{
     }
     return resp;
 }
+
+exports.del = async (headers, idPedido)=>{
+    auth = await userModel.verifyJWT(headers['x-access-token'], headers['perfil']);
+    if(auth.idUser){
+      if(headers.iduser==auth.idUser){
+        resp=await pedidoModel.del(idPedido);
+      }else{ 
+        resp= {"status":"null", auth}
+      }
+    }else{
+      resp= {"status":"null", auth}
+    }
+    return resp;
+}

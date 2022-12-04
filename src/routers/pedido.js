@@ -22,4 +22,9 @@ pedidoRouter.put('/status/:idPedido', async(req, res)=>{
   res.status(200).send(resp);
 })
 
+pedidoRouter.delete('/:idPedido', async(req, res)=>{
+  resp=await pedidoController.del(req.headers, req.params.idPedido );
+  res.status(200).send(resp);
+})
+
 module.exports = pedidoRouter;
