@@ -11,6 +11,7 @@ USE `Pizzaria` ;
 CREATE TABLE IF NOT EXISTS `Pizzaria`.`sabor` (
   `idsabor` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `sabor` VARCHAR(100) NULL,
+  `ativo` INT NULL,
   PRIMARY KEY (`idsabor`),
   UNIQUE INDEX `idpizza_UNIQUE` (`idsabor` ASC))
 ENGINE = InnoDB;
@@ -22,6 +23,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `Pizzaria`.`borda` (
   `idborda` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `borda` VARCHAR(45) NULL,
+  `ativo` INT NULL,
   PRIMARY KEY (`idborda`),
   UNIQUE INDEX `idborda_UNIQUE` (`idborda` ASC))
 ENGINE = InnoDB;
@@ -33,6 +35,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `Pizzaria`.`massa` (
   `idmassa` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `massa` VARCHAR(50) NULL,
+  `ativo` INT NULL,
   PRIMARY KEY (`idmassa`),
   UNIQUE INDEX `idmassa_UNIQUE` (`idmassa` ASC))
 ENGINE = InnoDB;
@@ -74,6 +77,7 @@ CREATE TABLE IF NOT EXISTS `Pizzaria`.`tamanho` (
   `idtamanho` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `tamanho` VARCHAR(45) NULL,
   `preco` FLOAT NULL,
+  `ativo` INT NULL,
   PRIMARY KEY (`idtamanho`),
   UNIQUE INDEX `idtamanho_UNIQUE` (`idtamanho` ASC))
 ENGINE = InnoDB;
