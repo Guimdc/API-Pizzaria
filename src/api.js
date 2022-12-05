@@ -20,10 +20,12 @@ const {
 const route=require("./routers/route");
 const userRoute=require("./routers/user");
 const pedidoRoute=require("./routers/pedido");
+const pizzaRoute=require("./routers/pizza");
 
 
 app.use('/', route);
 app.use('/user', userRoute);
 app.use('/pedido',pedidoRoute);
+app.use('/pizza', pizzaRoute);
 
 module.exports=app;
