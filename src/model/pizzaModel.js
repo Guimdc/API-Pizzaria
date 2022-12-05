@@ -73,4 +73,49 @@ postTamanho = async (data) =>{
     return resp;
 }
 
-module.exports = { getBorda, getMassa, getSabor, getTamanho, postBorda, postMassa, postSabor, postTamanho}
+putBorda = async (data, idBorda) => {
+    sql = `UPDATE borda SET borda='${data.borda}', ativo='${data.ativo}' WHERE idborda=${idBorda}`
+    const result = await mysql.query(sql);
+    if (result) {
+        resp = { "status": "OK"}
+    }else {
+        resp = { "status": "Error", "error": result }
+    }
+    return resp;
+}
+
+putMassa = async (data, idMassa) => {
+    sql = `UPDATE massa SET massa='${data.massa}', ativo='${data.ativo}' WHERE idmassa=${idMassa}`
+    const result = await mysql.query(sql);
+    if (result) {
+        resp = { "status": "OK"}
+    }else {
+        resp = { "status": "Error", "error": result }
+    }
+    return resp;
+}
+
+putSabor = async (data, idSabor) => {
+    sql = `UPDATE sabor SET sabor='${data.sabor}', ativo='${data.ativo}' WHERE  idsabor=${idSabor}`
+    const result = await mysql.query(sql);
+    if (result) {
+        resp = { "status": "OK"}
+    }else {
+        resp = { "status": "Error", "error": result }
+    }
+    return resp;
+}
+
+putTamanho = async (data, idTamanho) => {
+    sql = `UPDATE tamanho SET tamanho='${data.tamanho}', preco=${data.preco},ativo='${data.ativo}' WHERE  idtamanho=${idTamanho}`
+    const result = await mysql.query(sql);
+    if (result) {
+        resp = { "status": "OK"}
+    }else {
+        resp = { "status": "Error", "error": result }
+    }
+    return resp;
+}
+
+module.exports = { getBorda, getMassa, getSabor, getTamanho, postBorda, postMassa, 
+    postSabor, postTamanho, putBorda, putMassa, putSabor, putTamanho }

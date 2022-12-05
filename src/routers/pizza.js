@@ -42,4 +42,24 @@ pizzaRouter.post('/tamanho', async (req, res, next) => {
     res.status(200).send(user);
 })
 
+pizzaRouter.put('/borda/:idBorda', async (req, res) => {
+    resp = await pizzaController.putBorda(req.headers, req.body, req.params.idBorda);
+    res.status(200).send(resp);
+})
+
+pizzaRouter.put('/massa/:idMassa', async (req, res) => {
+    resp = await pizzaController.putMassa(req.headers, req.body, req.params.idMassa);
+    res.status(200).send(resp);
+})
+
+pizzaRouter.put('/sabor/:idSabor', async (req, res) => {
+    resp = await pizzaController.putSabor(req.headers, req.body, req.params.idSabor);
+    res.status(200).send(resp);
+})
+
+pizzaRouter.put('/tamanho/:idTamanho', async (req, res) => {
+    resp = await pizzaController.putTamanho(req.headers, req.body, req.params.idTamanho);
+    res.status(200).send(resp);
+})
+
 module.exports = pizzaRouter;
